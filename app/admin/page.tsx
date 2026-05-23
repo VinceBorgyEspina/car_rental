@@ -1,5 +1,6 @@
 import { db } from '@/lib/db'
 import { Car, Calendar, DollarSign, Users } from 'lucide-react'
+import type { Booking, Car as PrismaCar, User } from '@prisma/client'
 
 export default async function AdminOverviewPage() {
   const [totalCars, totalBookings, totalUsers, bookings] = await Promise.all([
@@ -90,7 +91,7 @@ export default async function AdminOverviewPage() {
                   </td>
                 </tr>
               ) : (
-                bookings.map((booking) => (
+                bookings.map((booking: Booking & { car: PrismaCar; user: User }) => (
                   <tr key={booking.id} className="hover:bg-white/5">
                     <td className="px-6 py-4">
                       <div className="font-medium text-white">{booking.user.name}</div>
