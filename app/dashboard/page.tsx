@@ -5,7 +5,6 @@ import { format } from 'date-fns'
 import Link from 'next/link'
 import { Calendar, Car as CarIcon, MapPin } from 'lucide-react'
 import { cancelBooking } from '@/lib/actions/booking'
-import type { Booking, Car } from '@prisma/client'
 
 export default async function DashboardPage() {
   const session = await getSession()
@@ -21,6 +20,7 @@ export default async function DashboardPage() {
       orderBy: { createdAt: 'desc' },
     }),
   ])
+  type BookingRow = (typeof bookings)[number]
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -61,7 +61,7 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div className="space-y-6">
-              {bookings.map((booking: Booking & { car: Car }) => (
+              {bookings.map((booking: BookingRow) => (
                 <div key={booking.id} className="glass-card flex flex-col overflow-hidden sm:flex-row">
                   {/* Car Image (mocked) */}
                   <div className="h-48 w-full shrink-0 bg-gradient-to-br from-[var(--color-dark-800)] to-[var(--color-dark-900)] sm:h-auto sm:w-48">
