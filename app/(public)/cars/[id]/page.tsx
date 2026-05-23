@@ -19,8 +19,8 @@ export default async function CarDetailPage({
   }
 
   // Parse images and features
-  const images = car.images ? car.images.split(',').map((s: string) => s.trim()) : []
-  const features = car.features ? car.features.split(',').map((s: string) => s.trim()) : []
+  const images: string[] = car.images ? car.images.split(',').map((s: string) => s.trim()) : []
+  const features: string[] = car.features ? car.features.split(',').map((s: string) => s.trim()) : []
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -41,7 +41,7 @@ export default async function CarDetailPage({
           {/* Thumbnails (Mocked if no images) */}
           {images.length > 1 && (
             <div className="mt-4 flex gap-4 overflow-x-auto pb-2">
-              {images.slice(1).map((img, idx) => (
+              {images.slice(1).map((img: string, idx: number) => (
                 <div key={idx} className="h-24 w-32 shrink-0 cursor-pointer overflow-hidden rounded-lg border-2 border-transparent bg-[var(--color-dark-800)] hover:border-[var(--color-brand-500)]">
                   <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: `url(${img})` }} />
                 </div>
@@ -139,7 +139,7 @@ export default async function CarDetailPage({
           <h3 className="mb-6 text-2xl font-bold text-white">Features</h3>
           {features.length > 0 ? (
             <ul className="space-y-4">
-              {features.map((feature, i) => (
+              {features.map((feature: string, i: number) => (
                 <li key={i} className="flex items-center gap-3 text-[var(--color-dark-200)]">
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-brand-500)]/20 text-[var(--color-brand-400)]">
                     <Check size={14} />
