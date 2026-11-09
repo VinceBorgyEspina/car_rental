@@ -2,6 +2,7 @@ import { db } from '@/lib/db'
 import Link from 'next/link'
 import { Plus, Edit } from 'lucide-react'
 import { DeleteCarButton } from '@/components/DeleteCarButton'
+import type { Car } from '@prisma/client'
 
 export default async function AdminCarsPage() {
   const cars = await db.car.findMany({
@@ -41,7 +42,7 @@ export default async function AdminCarsPage() {
                   </td>
                 </tr>
               ) : (
-                cars.map((car) => (
+                cars.map((car: Car) => (
                   <tr key={car.id} className="hover:bg-white/5">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-4">

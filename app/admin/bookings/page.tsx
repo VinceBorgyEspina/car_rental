@@ -1,5 +1,6 @@
 import { db } from '@/lib/db'
 import { BookingStatusSelect } from '@/components/BookingStatusSelect'
+import type { Booking, Car, User } from '@prisma/client'
 
 export default async function AdminBookingsPage() {
   const bookings = await db.booking.findMany({
@@ -35,7 +36,7 @@ export default async function AdminBookingsPage() {
                   </td>
                 </tr>
               ) : (
-                bookings.map((booking) => (
+                bookings.map((booking: Booking & { car: Car; user: User }) => (
                   <tr key={booking.id} className="hover:bg-white/5">
                     <td className="px-6 py-4 font-mono text-xs text-[var(--color-dark-300)]">
                       #{booking.id.slice(-8).toUpperCase()}
