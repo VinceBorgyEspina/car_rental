@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { Car as CarIcon, Filter, Settings, Users, Fuel } from 'lucide-react'
 import { db } from '@/lib/db'
-import type { Car } from '@prisma/client'
 
 export default async function CarsPage() {
   const cars = await db.car.findMany()
+  type CarRow = (typeof cars)[number]
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -63,7 +63,7 @@ export default async function CarsPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {cars.map((car: Car) => (
+              {cars.map((car: CarRow) => (
                 <Link key={car.id} href={`/cars/${car.id}`} className="group block">
                   <div className="glass-card h-full overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_40px_rgba(247,134,17,0.15)]">
                     <div className="relative h-48 w-full bg-[var(--color-dark-800)]">
