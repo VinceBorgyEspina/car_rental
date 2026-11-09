@@ -19,8 +19,8 @@ export default async function CarDetailPage({
   }
 
   // Parse images and features
-  const images = car.images ? car.images.split(',').map(s => s.trim()) : []
-  const features = car.features ? car.features.split(',').map(s => s.trim()) : []
+  const images = car.images ? car.images.split(',').map((s: string) => s.trim()) : []
+  const features = car.features ? car.features.split(',').map((s: string) => s.trim()) : []
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
